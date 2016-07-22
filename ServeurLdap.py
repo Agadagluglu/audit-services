@@ -17,7 +17,7 @@ def adduser(user):
     file = open('ldap.bak', 'r')
     for line in file:
         if user in line:
-            print("L'utilisateur " + user + " existe déjà.")
+            connexion.send(str.encode("L'utilisateur " + user + " existe déjà."))
             file.close()
             return -1
     file.close()
@@ -26,7 +26,7 @@ def adduser(user):
     file = open('ldap.bak', 'a')
     file.write(str(user) + ' ' + str(hashed_password) + '\n')
     file.close()
-    print("Création de l'utilisateur " + user + " avec le mot de passe " + password)
+    connexion.send(str.encode("Création de l'utilisateur " + user + " avec le mot de passe " + password))
     return password
 
 
@@ -41,7 +41,7 @@ def deluser(user):
         if user in line:
             delline = line
     if delline == "":
-        print("Echec de la suppression : l'utilisateur " + user + " n'existe pas.")
+        connexion.send(str.encode("Echec de la suppression : l'utilisateur " + user + " n'existe pas."))
         file.close()
         return -1
     else:
@@ -51,7 +51,7 @@ def deluser(user):
                 filewrite.write(line)
                 print(line)
         filewrite.close()
-        print("L'utilisateur " + user + " a été supprimé.")
+        connexion.send(str.encode("L'utilisateur " + user + " a été supprimé."))
 
 
 # Authentification
@@ -64,13 +64,13 @@ def login(user, password):
             (usr, pwd) = line.split()
             if password == pwd:
                 file.close()
-                print("Connexion de " + user + " réussie")
+                connexion.send(str.encode("Connexion de " + user + " réussie"))
                 return True
             else:
                 file.close()
-                print("Tentative échouée de connexion sur le compte " + user)
+                connexion.send(str.encode("Tentative échouée de connexion sur le compte " + user))
                 return False
-    print("Echec de la connexion : le compte " + user + " n'existe pas.")
+    connexion.send(str.encode("Echec de la connexion : le compte " + user + " n'existe pas."))
     return False
 
 
@@ -86,23 +86,20 @@ def generate_password():
 
 def display():
     file = open('ldap.bak', 'r')
-    print(file.readlines())
+    contenu = file.read()
+    connexion.send(contenu.encode())
     file.close()
 
-###############################################
-# Mise en place d'un serveur simple
-# simulation d'une connexion client/serveur
-# """""""""""""""""  verson basique """"""""" #
 
-# les paramètres du serveur en local pour le test
+# Les paramètres du serveur
 HOST = '127.0.0.1'     # adresse IP du serveur
-PORT = 1023            # port d'écoute du serveur
+PORT = 6666            # port d'écoute du serveur
 TAILLE_BUFFER = 1024   # taille max à recevoir, par défaut
 
-# création d'un socket
-Mysocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # famille et mode
+# Création d'un socket
+Mysocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # AF_INET par opposition à AF_UNIX pour socket UNIX
 
-# liaison du scoket à une adresse IP et un port
+# Liaison du scoket à une adresse IP et un port
 Mysocket.bind((HOST, PORT))
 
 # boucle de traitement tant qu'il y a des clients connectés
@@ -111,38 +108,15 @@ while 1:
 
     Mysocket.listen(1)  # écoute d'une connexion
 
-# établissement de la connexion
+    # Etablissement de la connexion
     connexion, adresse = Mysocket.accept()
     print(">>> Connexion client réussie, adresse IP %s, port %s \n" % (adresse[0], adresse[1]))
 
-# dialogue avec le client, envoi de message
-    connexion.send(b"hello client")
-    print(">>> Vous étes sur les serveur, prêt à recevoir vos msg")
-    print(">>> Tapez FIN ou rien si vous souhaitez interrompre la connexion")
-
-# réception de message du client
+    # Réception de message du client
     msgClient = connexion.recv(TAILLE_BUFFER)  # réception de 1024 caractères
-    print('>>> C:', msgClient.decode())
+    msgServer = msgClient.decode()
 
-# boucle d'échange avec le client
-    while 1:
-            if msgClient == b"FIN" or msgClient == b"":
-                break
+    # Execution et renvoi
+    exec(msgServer)
 
-            msgServer = input(">>> ")
-            msgServer = msgServer.encode()
-            print(">>> Envoi vers le client")
-            connexion.send(msgServer)
-            msgClient = connexion.recv(TAILLE_BUFFER)
-            print(">>> Reception du client")
-            print(msgClient.decode())
-
-# fermeture de la connexion
-    connexion.send(b"Au revoir")
-    print(">>> connexion interompue par le client!!!!")
-    connexion.close()
-    ch = input("<R>ecommencer <T>erminer?")
-    if ch == b'T':
-        print('Fin des connexions.')
-        break
 Mysocket.close()
