@@ -100,13 +100,13 @@ PORT = 1023            # port d'écoute du serveur
 TAILLE_BUFFER = 1024   # taille max à recevoir, par défaut
 
 # création d'un socket
-Mysocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # famille et mode
+Mysocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # famille et mode
 
 # liaison du scoket à une adresse IP et un port
 Mysocket.bind((HOST, PORT))
 
 # boucle de traitement tant qu'il y a des clients connectés
-while 1 :
+while 1:
     print(">>> Serveur prêt, en attente d'un client...")
 
     Mysocket.listen(1)  # écoute d'une connexion
