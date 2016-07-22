@@ -12,12 +12,6 @@ ftp_login = 'felix'   #configuré sur le serveur avec son pwd
 ftp_password = ''
 
 
-
-
-
-
-
-
 path = '/'
 ftp = FTP(ftp_host, ftp_login, ftp_password)
 ftp.debug(7)
