@@ -1,14 +1,14 @@
-#-------------------------------------------------------------#
-#        Exemple de script d'acès en FTP à un server          #
-#                      vesrion béta                           #
-#-------------------------------------------------------------#
+# -------------------------------------------------------------#
+#        Exemple de script d'acès en FTP à un server           #
+#                      vesrion béta                            #
+# -------------------------------------------------------------#
 
 from ftplib import FTP
 
 # les paramètres de connexion au serveur FTP
 
 ftp_host = '127.0.0.1'
-ftp_login = 'felix'   #configuré sur le serveur avec son pwd
+ftp_login = 'felix'   # configuré sur le serveur avec son pwd
 ftp_password = ''
 
 
