@@ -2,6 +2,7 @@ import hashlib
 import binascii
 import random
 import string
+import itertools
 import socket
 
 
@@ -47,18 +48,40 @@ class MyString(str):
 
         return MyString(res)
 
+
+def envoi(msg_client):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    try:
+        # Connexion au serveur
+        sock.connect(('127.0.0.1', 6666))
+
+    except socket.error:
+        print("la connexion a échoué.")
+        sys.exit()
+
+    print(">>> Connexion établie avec le serveur.")
+    sock.send(str.encode(msg_client))
+    msg_server = sock.recv(1024)
+    msg_server.decode()
+    print(msg_server.decode())
+
+    sock.close()
+    return msg_server
+
+
 liste_de_char = string.ascii_letters+string.digits
-tmp = 1
-countnb = 0
-mot = []
-while tmp and countnb < 4:
-    #mot.append('')
-    countnb += 1
-    for i in range(countnb):
-        mot.append('')
-        for j in range(62):
-            #mot.append('')
-            print(countnb)
-            mot[countnb-1] = liste_de_char[j]
-            # test
-            print(mot)
+
+def iter_all_strings():
+    size = 1
+    while True:
+        for password in itertools.product(liste_de_char, repeat=size):
+            yield "".join(password)
+        size +=1
+
+
+user = 'felix'
+for password in iter_all_strings():
+    envoi("login(\"" + user + "\" , \"" + password + "\")")
+    if len(password) > 12:
+        break
