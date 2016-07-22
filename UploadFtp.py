@@ -7,12 +7,12 @@ from ftplib import FTP
 
 # les paramètres de connexion au serveur FTP
 
-ftp_host = '127.0.0.1'
-ftp_login = 'felix'   # configuré sur le serveur avec son pwd
-ftp_password = ''
+ftp_host = '192.168.1.43'
+ftp_login = 'fbouynot'   # configuré sur le serveur avec son pwd
+ftp_password = 'Azerty1234'
 
 
-path = '/'
+path = '.'
 ftp = FTP(ftp_host, ftp_login, ftp_password)
 ftp.debug(7)
 
@@ -47,7 +47,7 @@ ftp.mkd('MYRep')
 print("Après création :")
 print(ftp.nlst())
 
-print("Effacement du répertoire fic :")
+print("Effacement du répertoire fichier :")
 ftp.rmd('MYRep')
 print("Après effacement du répertoire:")
 print(ftp.dir())
