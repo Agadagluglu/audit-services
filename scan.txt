@@ -1,0 +1,73 @@
+la date : 2016-07-22
+
++-----------+---------------+
+|port       |   etat        |
++-----------+---------------+
+ le port 20 :fermé 
+le port 21  :ouvert 
+ le port 22 :fermé 
+ le port 23 :fermé 
+ le port 24 :fermé 
+ le port 25 :fermé 
+ le port 26 :fermé 
+ le port 27 :fermé 
+ le port 28 :fermé 
+ le port 29 :fermé 
+ le port 30 :fermé 
+ le port 31 :fermé 
+ le port 32 :fermé 
+ le port 33 :fermé 
+ le port 34 :fermé 
+ le port 35 :fermé 
+ le port 36 :fermé 
+ le port 37 :fermé 
+ le port 38 :fermé 
+ le port 39 :fermé 
+ le port 40 :fermé 
+ le port 41 :fermé 
+ le port 42 :fermé 
+ le port 43 :fermé 
+ le port 44 :fermé 
+ le port 45 :fermé 
+ le port 46 :fermé 
+ le port 47 :fermé 
+ le port 48 :fermé 
+ le port 49 :fermé 
+ le port 50 :fermé 
+ le port 51 :fermé 
+ le port 52 :fermé 
+ le port 53 :fermé 
+ le port 54 :fermé 
+ le port 55 :fermé 
+ le port 56 :fermé 
+ le port 57 :fermé 
+ le port 58 :fermé 
+ le port 59 :fermé 
+ le port 60 :fermé 
+ le port 61 :fermé 
+ le port 62 :fermé 
+ le port 63 :fermé 
+ le port 64 :fermé 
+ le port 65 :fermé 
+ le port 66 :fermé 
+ le port 67 :fermé 
+ le port 68 :fermé 
+ le port 69 :fermé 
+ le port 70 :fermé 
+ le port 71 :fermé 
+ le port 72 :fermé 
+ le port 73 :fermé 
+ le port 74 :fermé 
+ le port 75 :fermé 
+ le port 76 :fermé 
+ le port 77 :fermé 
+ le port 78 :fermé 
+ le port 79 :fermé 
+ le port 80 :fermé 
+ le port 81 :fermé 
+ le port 82 :fermé 
+ le port 83 :fermé 
+ le port 84 :fermé 
+ le port 85 :fermé 
+ le port 86 :fermé 
+ le port 87 :fermé 
