@@ -3,6 +3,7 @@ import binascii
 import random
 import string
 import socket
+import fileinput
 
 
 # Fonction de hash de password
@@ -72,6 +73,20 @@ def login(user, password):
                 return False
     connexion.send(str.encode("Echec de la connexion : le compte " + user + " n'existe pas."))
     return False
+
+
+# Changement du mot de passe
+def change_password(user, password):
+
+    for line in fileinput.input('ldap.bak', inplace=True):
+        if user in line:
+            continue
+        print(line, end='')
+
+    file = open('ldap.bak', 'a')
+    file.write(str(user) + ' ' + str(hashing(password)) + '\n')
+    file.close()
+    connexion.send(str.encode("Modification du mot de passe de " + user))
 
 
 # Génération du mot de passe aléatoire
