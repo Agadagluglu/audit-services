@@ -3,7 +3,7 @@ import time
 
 # les paramètres de connexion au serveur FTP
 
-ftp_host = '192.168.1.43'
+ftp_host = '172.31.98.159'
 ftp_login = 'admin'
 ftp_password = 'Azerty1234'
 
